@@ -11,8 +11,8 @@ var db = admin.firestore();
 exports.getTimelinesList = functions.https.onRequest((request, response) => {
     let _data = [];
     cors(request, response, () => { });
-    var citiesRef = db.collection('timelines');
-    var query = citiesRef.get()
+    var ref = db.collection('timelines');
+    var query = ref.orderBy('name').get()
         .then(snapshot => {
             if (snapshot.empty) {
                 console.log('No matching documents.');
